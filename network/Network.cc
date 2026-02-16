@@ -1254,28 +1254,28 @@ private:
 };
 
 LeafInstanceIterator1::LeafInstanceIterator1(const Instance *inst,
-		const Network *network) :
-	network_(network),
-	child_iter_(network->childIterator(inst)),
-	next_(nullptr)
+					     const Network *network) :
+  network_(network),
+  child_iter_(network->childIterator(inst)),
+  next_(nullptr)
 {
-	pending_child_iters_.reserve(8);
-	nextInst();
+  pending_child_iters_.reserve(8);
+  nextInst();
 }
 
-	Instance *
+Instance *
 LeafInstanceIterator1::next()
 {
-	Instance *next = next_;
-	nextInst();
-	return next;
+  Instance *next = next_;
+  nextInst();
+  return next;
 }
 
-	void
+void
 LeafInstanceIterator1::nextInst()
 {
-	next_ = nullptr;
-	while (child_iter_) {
+  next_ = nullptr;
+  while (child_iter_) {
     while (child_iter_->hasNext()) {
       next_ = child_iter_->next();
       if (network_->isLeaf(next_))
